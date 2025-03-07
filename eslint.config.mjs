@@ -15,6 +15,9 @@ const eslintConfig = [
     'next/typescript',
     '@rocketseat/eslint-config/react',
   ),
+  {
+    ignores: ['**/*.d.ts'],
+  },
 ]
 
 export default eslintConfig
