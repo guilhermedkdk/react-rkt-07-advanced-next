@@ -1,5 +1,12 @@
-import { Button, Heading, MultiStep, Text, TextInput } from '@ignite-ui/react'
-import { useEffect } from 'react'
+import {
+  Button,
+  Heading,
+  MultiStep,
+  Text,
+  TextInput,
+  TextInputProps,
+} from '@ignite-ui/react'
+import { forwardRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
@@ -61,6 +68,21 @@ export default function Register() {
     }
   }
 
+  const CustomTextInput = forwardRef<HTMLInputElement, TextInputProps>(
+    (props, ref) => {
+      return (
+        <TextInput
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+          crossOrigin={undefined}
+          ref={ref}
+          {...props}
+        />
+      )
+    },
+  )
+  CustomTextInput.displayName = 'CustomTextInput'
+
   return (
     <>
       <NextSeo title="Crie uma conta | Ignite Call" />
@@ -79,7 +101,7 @@ export default function Register() {
         <Form as="form" onSubmit={handleSubmit(handleRegister)}>
           <label>
             <Text size="sm">Nome de usuário</Text>
-            <TextInput
+            <CustomTextInput
               prefix="ignite.com/"
               placeholder="seu-usuário"
               {...register('username')}
@@ -92,7 +114,7 @@ export default function Register() {
 
           <label>
             <Text size="sm">Nome completo</Text>
-            <TextInput placeholder="Seu nome" {...register('name')} />
+            <CustomTextInput placeholder="Seu nome" {...register('name')} />
 
             {errors.name && (
               <FormError size="sm">{errors.name.message}</FormError>

@@ -9,6 +9,7 @@ import {
   TextInputProps,
 } from '@ignite-ui/react'
 
+import { forwardRef } from 'react'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
@@ -29,7 +30,6 @@ import {
   FormError,
 } from './styles'
 import { Container, Header } from '../styles'
-import { forwardRef } from 'react'
 
 const timeIntervalsFormSchema = z.object({
   intervals: z

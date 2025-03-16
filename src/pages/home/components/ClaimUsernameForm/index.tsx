@@ -1,4 +1,5 @@
-import { Button, TextInput, Text } from '@ignite-ui/react'
+import { Button, TextInput, Text, TextInputProps } from '@ignite-ui/react'
+import { forwardRef } from 'react'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -37,10 +38,25 @@ export function ClaimUsernameForm() {
     await router.push(`/register?username=${username}`)
   }
 
+  const CustomTextInput = forwardRef<HTMLInputElement, TextInputProps>(
+    (props, ref) => {
+      return (
+        <TextInput
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+          crossOrigin={undefined}
+          ref={ref}
+          {...props}
+        />
+      )
+    },
+  )
+  CustomTextInput.displayName = 'CustomTextInput'
+
   return (
     <>
       <Form as="form" onSubmit={handleSubmit(handleClaimUsername)}>
-        <TextInput
+        <CustomTextInput
           size="sm"
           prefix="ignite.com/"
           placeholder="seu-usuário"
