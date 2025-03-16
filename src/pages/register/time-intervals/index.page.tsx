@@ -6,6 +6,7 @@ import {
   MultiStep,
   Text,
   TextInput,
+  TextInputProps,
 } from '@ignite-ui/react'
 
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
@@ -28,6 +29,7 @@ import {
   FormError,
 } from './styles'
 import { Container, Header } from '../styles'
+import { forwardRef } from 'react'
 
 const timeIntervalsFormSchema = z.object({
   intervals: z
@@ -109,6 +111,21 @@ export default function TimeIntervals() {
     await router.push('/register/update-profile')
   }
 
+  const CustomTextInput = forwardRef<HTMLInputElement, TextInputProps>(
+    (props, ref) => {
+      return (
+        <TextInput
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+          crossOrigin={undefined}
+          ref={ref}
+          {...props}
+        />
+      )
+    },
+  )
+  CustomTextInput.displayName = 'CustomTextInput'
+
   return (
     <>
       <NextSeo title="Selecione sua disponibilidade | Ignite Call" noindex />
@@ -148,14 +165,14 @@ export default function TimeIntervals() {
                   </IntervalDay>
 
                   <IntervalInputs>
-                    <TextInput
+                    <CustomTextInput
                       size="sm"
                       type="time"
                       step={60}
                       disabled={intervals[index].enabled === false}
                       {...register(`intervals.${index}.startTime`)}
                     />
-                    <TextInput
+                    <CustomTextInput
                       size="sm"
                       type="time"
                       step={60}
