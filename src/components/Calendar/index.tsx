@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useMemo, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
