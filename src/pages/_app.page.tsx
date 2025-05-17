@@ -1,14 +1,14 @@
-import type { AppProps } from 'next/app'
-import { SessionProvider } from 'next-auth/react'
-import { QueryClientProvider } from '@tanstack/react-query'
-import { DefaultSeo } from 'next-seo'
+import type { AppProps } from "next/app";
+import { SessionProvider } from "next-auth/react";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { DefaultSeo } from "next-seo";
 
-import { queryClient } from '@/lib/react-query'
-import '../lib/dayjs'
+import { queryClient } from "@/lib/react-query";
+import "../lib/dayjs";
 
-import { globalStyles } from '@/styles/global'
+import { globalStyles } from "@/styles/global";
 
-globalStyles()
+globalStyles();
 
 export default function App({
   Component,
@@ -19,15 +19,15 @@ export default function App({
       <SessionProvider session={session}>
         <DefaultSeo
           openGraph={{
-            type: 'website',
-            locale: 'pt_BR',
-            url: 'https://ignite-call.com.br',
-            siteName: 'Ignite Call',
+            type: "website",
+            locale: "pt_BR",
+            url: "https://ignite-call.com.br",
+            siteName: "EZ Call",
           }}
         />
 
         <Component {...pageProps} />
       </SessionProvider>
     </QueryClientProvider>
-  )
+  );
 }
