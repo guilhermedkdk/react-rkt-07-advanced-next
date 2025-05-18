@@ -5,29 +5,29 @@ import {
   MultiStep,
   Text,
   TextArea,
-} from "@ignite-ui/react";
+} from '@ignite-ui/react'
 
-import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { GetServerSideProps } from "next";
-import { getServerSession } from "next-auth";
-import { useSession } from "next-auth/react";
-import { NextSeo } from "next-seo";
-import { z } from "zod";
+import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { GetServerSideProps } from 'next'
+import { getServerSession } from 'next-auth'
+import { useSession } from 'next-auth/react'
+import { NextSeo } from 'next-seo'
+import { z } from 'zod'
 
-import { buildNextAuthOptions } from "@/pages/api/auth/[...nextauth].api";
-import { api } from "@/lib/axios";
-import { ArrowRight } from "phosphor-react";
+import { buildNextAuthOptions } from '@/pages/api/auth/[...nextauth].api'
+import { api } from '@/lib/axios'
+import { ArrowRight } from 'phosphor-react'
 
-import { FormAnnotation, ProfileBox } from "./styles";
-import { Container, Header } from "../styles";
+import { FormAnnotation, ProfileBox } from './styles'
+import { Container, Header } from '../styles'
 
 const updateProfileSchema = z.object({
   bio: z.string(),
-});
+})
 
-type UpdateProfileData = z.infer<typeof updateProfileSchema>;
+type UpdateProfileData = z.infer<typeof updateProfileSchema>
 
 export default function Register() {
   const {
@@ -36,17 +36,17 @@ export default function Register() {
     formState: { isSubmitting },
   } = useForm<UpdateProfileData>({
     resolver: zodResolver(updateProfileSchema),
-  });
+  })
 
-  const session = useSession();
-  const router = useRouter();
+  const session = useSession()
+  const router = useRouter()
 
   async function handleUpdateProfile(data: UpdateProfileData) {
-    await api.put("/users/profile", {
+    await api.put('/users/profile', {
       bio: data.bio,
-    });
+    })
 
-    await router.push(`/schedule/${session.data?.user.username}`);
+    await router.push(`/schedule/${session.data?.user.username}`)
   }
 
   return (
@@ -75,7 +75,7 @@ export default function Register() {
 
           <label>
             <Text size="sm">Sobre você</Text>
-            <TextArea {...register("bio")} />
+            <TextArea {...register('bio')} />
             <FormAnnotation size="sm">
               Fale um pouco sobre você. Isto será exibido em sua página pessoal.
             </FormAnnotation>
@@ -88,19 +88,19 @@ export default function Register() {
         </ProfileBox>
       </Container>
     </>
-  );
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getServerSession(
     req,
     res,
-    buildNextAuthOptions(req, res)
-  );
+    buildNextAuthOptions(req, res),
+  )
 
   return {
     props: {
       session,
     },
-  };
-};
+  }
+}
