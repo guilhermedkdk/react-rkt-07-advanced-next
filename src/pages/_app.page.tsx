@@ -21,7 +21,7 @@ export default function App({
           openGraph={{
             type: 'website',
             locale: 'pt_BR',
-            url: 'https://ignite-call.com.br',
+            url: 'https://ez-call.com.br',
             siteName: 'EZ Call',
           }}
         />
